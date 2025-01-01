@@ -4,121 +4,150 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-  body {
-    font-family: sans-serif;
+body {
+    font-family: 'Arial', sans-serif;
     text-align: center;
-    padding: 10px;
-    background: #e6f2ff; /* Albastru deschis */
+    padding: 20px;
+    background: linear-gradient(to bottom, #e6f2ff, #cce0ff);
     margin: 0;
-  }
-  
-  h1 {
-    margin-bottom: 10px;
-    color: #00008B; /* Albastru închis */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #000080;
     font-weight: bold;
-  }
+    font-size: 2.5em;
+}
 
-  #taskNumber {
+#taskNumber {
     margin-bottom: 10px;
-  }
+}
 
-  .top-shapes-container {
-    display: inline-flex;
+.top-shapes-container {
+    display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
-  }
+    flex-wrap: nowrap; /* Fără înfășurare */
+    max-width: 550px; /* Spațiu puțin mai mare */
+}
 
-  .shape-box {
-    width: 100px;
-    height: 100px;
-    border: 2px solid #00008B; /* Albastru închis */
-    margin: 5px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background: #ffffcc; /* Galben deschis */
-    font-size: 48px;  
-  }
+.shape-box {
+    width: 110px; /* Lățime de bază */
+    height: 110px;
+    border: 3px solid #000080;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffcc;
+    font-size: 52px;
+    border-radius: 10px;
+    flex-basis: auto; /* Ajustare automată a lățimii */
+}
 
-  .bottom-shape-box {
-    width: 100px;
-    height: 100px;
-    border: 2px solid #00008B; 
+.bottom-shape-box {
+    width: 110px;
+    height: 110px;
+    border: 3px solid #000080;
     margin: 10px auto;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background: #ffffcc; 
-    font-size: 48px; 
-  }
+    display: flex; /* Centrează elementele */
+    align-items: center;
+    justify-content: center;
+    background: #ffffcc;
+    font-size: 52px;
+    border-radius: 10px;
+}
 
-  .instruction {
-    margin: 10px auto;
-    font-size: 14px;
-    max-width: 500px;
-  }
+.instruction {
+    margin: 20px auto;
+    font-size: 16px;
+    max-width: 600px;
+    line-height: 1.5;
+}
 
-  .buttons {
+.buttons {
     margin-top: 10px;
-  }
-  
-  .buttons button {
-    width: 60px;
-    height: 60px;
-    margin: 0 20px;
-    font-size: 14px;
-    border: none;
+}
+
+.buttons button {
+    width: 70px;
+    height: 70px;
+    margin: 0 25px;
+    font-size: 0; /* Ascunde textul */
+    border: 2px solid #000;
     cursor: pointer;
     outline: none;
-  }
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 
-  .green-button {
-    background-color: #0f0;
-  }
+.buttons button:hover {
+    transform: scale(1.1);
+}
 
-  .red-button {
-    background-color: #f00;
-  }
+.green-button {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230f0'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E"); /* Bifa verde */
+}
 
-  #result {
-    margin-top:20px; 
-    font-size: 16px; 
-    font-weight:bold;
-  }
+.red-button {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f00'%3E%3Cpath d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/%3E%3C/svg%3E"); /* X roșu */
+}
 
-  #restartButton {
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 20px;
+    border: 3px solid #000080;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.2);
+}
+
+#restartButton {
     display: none;
     margin-top: 20px;
     font-size: 14px;
-    padding: 5px 10px;
+    padding: 10px 20px;
     cursor: pointer;
     background: #333;
     color: #fff;
     border: none;
-  }
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
 
-  /* Ecran start */
-  #startScreen {
-    margin-top: 50px;
-  }
+#startScreen {
+    margin-top: 20px;
+}
 
-  #testContainer {
+#testContainer {
     display: none;
-  }
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+}
 </style>
-<title>Test de comparație a figurilor</title>
+<title>Test de comparare a figurilor</title>
 </head>
 <body>
 
-<h1>Test de comparație a figurilor</h1>
+<h1>Test de comparare a figurilor</h1>
 
 <div id="startScreen">
   <p>Vă rugăm să alegeți numărul de sarcini:</p>
   <label><input type="radio" name="taskCount" value="10" checked> 10 sarcini</label>
-  <label><input type="radio" name="taskCount" value="20"> 20 sarcini</label>
+  <label><input type="radio" name="taskCount" value="20"> 20 de sarcini</label>
+  <label><input type="radio" name="taskCount" value="30"> 30 de sarcini</label>
+  <label><input type="radio" name="taskCount" value="40"> 40 de sarcini</label>
   <br><br>
-  <button id="startButton">Pornire</button>
+  <button id="startButton">Start</button>
 </div>
 
 <div id="testContainer">
@@ -129,31 +158,36 @@
   <div class="bottom-shape-box" id="bottomShape"></div>
 
   <div class="instruction">
-    Dacă figura apare sus, apăsați butonul verde!<br>
-    Dacă nu apare, apăsați butonul roșu!
+    Dacă se potrivește, faceți clic pe butonul verde!<br>
+    În caz contrar, faceți clic pe butonul roșu!
   </div>
 
   <div class="buttons">
-    <button id="yesButton" class="green-button"></button>
-    <button id="noButton" class="red-button"></button>
+    <button id="yesButton" class="green-button"><span>Da</span></button>
+    <button id="noButton" class="red-button"><span>Nu</span></button>
   </div>
 
+  <hr style="margin-top: 20px; width: 80%;">
+
   <div id="result"></div>
-  <button id="restartButton">Reporniți testul?</button>
+  <button id="restartButton">REPORNIRE?</button>
 </div>
 
 <script>
+// Simboluri disponibile pentru sarcini
 const symbolPool = ['O','◊','/','-','\\','⌐','X','Δ','□','⊗','|','T'];
 
+// Variabile globale
 let tasks = [];
 let currentTaskIndex = 0;
-let results = []; 
+let results = []; // {correct: boolean, reactionTime: number}
 let startTime = null;
-let totalTasks = 10; 
+let totalTasks = 10; // va fi selectat la început
 
 document.getElementById('startButton').addEventListener('click', startTest);
 
 function startTest() {
+  // Citește numărul de sarcini
   const radios = document.getElementsByName('taskCount');
   for (const r of radios) {
     if (r.checked) {
@@ -161,12 +195,15 @@ function startTest() {
       break;
     }
   }
-  
+
+  // Generează sarcini
   tasks = generateTasks(totalTasks);
-  
+
+  // Ascunde ecranul de start, afișează containerul de testare
   document.getElementById('startScreen').style.display = 'none';
-  document.getElementById('testContainer').style.display = 'block';
-  
+  document.getElementById('testContainer').style.display = 'flex';
+
+  // Afișează prima sarcină
   currentTaskIndex = 0;
   results = [];
   showTask(currentTaskIndex);
@@ -175,6 +212,7 @@ function startTest() {
 function generateTasks(count) {
   const generatedTasks = [];
   for (let i = 0; i < count; i++) {
+    // 4 simboluri aleatorii pentru partea de sus
     let topShapes = [];
     while (topShapes.length < 4) {
       const sym = symbolPool[Math.floor(Math.random()*symbolPool.length)];
@@ -182,12 +220,13 @@ function generateTasks(count) {
         topShapes.push(sym);
       }
     }
-
-    let includeTarget = Math.random() < 0.5; 
+    // Simbolul țintă este fie unul dintre cele de sus, fie altul aleatoriu
+    let includeTarget = Math.random() < 0.5; // 50% șanse ca ținta să fie inclusă
     let target;
     if (includeTarget) {
       target = topShapes[Math.floor(Math.random()*topShapes.length)];
     } else {
+      // Un simbol care nu este în partea de sus
       do {
         target = symbolPool[Math.floor(Math.random()*symbolPool.length)];
       } while (topShapes.includes(target));
@@ -199,21 +238,27 @@ function generateTasks(count) {
 
 function showTask(index) {
   const task = tasks[index];
-  
+
   document.getElementById('taskNumber').textContent = `Sarcina ${index+1} din ${tasks.length}`;
-  
+
   const topRow = document.getElementById('topRow');
   topRow.innerHTML = '';
+
   task.topShapes.forEach(shape => {
     const el = document.createElement('div');
     el.className = 'shape-box';
-    el.textContent = shape; 
+    el.textContent = shape;
+    console.log(`Added shape: ${shape}`); // Depanare
+
     topRow.appendChild(el);
   });
-  
+
   const bottomShape = document.getElementById('bottomShape');
+
+  // Afișează ÎNTOTDEAUNA simbolul de jos
+  bottomShape.style.visibility = 'visible';
   bottomShape.textContent = task.target;
-  
+
   startTime = Date.now();
 }
 
@@ -231,64 +276,67 @@ function evaluateAnswer(userSaysYes) {
   const task = tasks[currentTaskIndex];
   const correct = task.topShapes.includes(task.target);
   const userCorrect = (correct && userSaysYes) || (!correct && !userSaysYes);
-  const reactionTime = (endTime - startTime) / 1000; 
-  
+  const reactionTime = (endTime - startTime) / 1000; // în secunde
+
   results.push({correct: userCorrect, reactionTime: reactionTime});
-  
+
   nextTask();
 }
 
 function showResults() {
   const correctCount = results.filter(r => r.correct).length;
   const correctPercent = (correctCount / tasks.length) * 100;
-  
+
   const avgTime = results.reduce((sum,r)=>sum+r.reactionTime,0) / tasks.length;
-  
+
   let baseRating = '';
   if (correctPercent >= 90) baseRating = 'foarte bine';
   else if (correctPercent >= 80) baseRating = 'bine';
   else if (correctPercent >= 70) baseRating = 'satisfăcător';
   else if (correctPercent >= 60) baseRating = 'suficient';
-  else baseRating = 'nepromovat';
-  
+  else baseRating = 'necorespunzător';
+
   let timeOver = avgTime - 2.5;
   let timePenaltyPercent = 0;
   if (timeOver > 0) {
     timePenaltyPercent = timeOver * 10;
   }
-  
-  const ratingMap = { 'foarte bine':5, 'bine':4, 'satisfăcător':3, 'suficient':2, 'nepromovat':1 };
+
+  const ratingMap = { 'foarte bine':5, 'bine':4, 'satisfăcător':3, 'suficient':2, 'necorespunzător':1 };
   let ratingValue = ratingMap[baseRating];
   let stepsDown = Math.floor(timePenaltyPercent / 10);
   ratingValue -= stepsDown;
   if (ratingValue < 1) ratingValue = 1;
-  
+
   const finalRating = Object.keys(ratingMap).find(key => ratingMap[key] === ratingValue);
-  
-  document.getElementById('result').textContent = 
-    `Rezultat: ${Math.round(correctPercent)}% răspunsuri corecte, Timp mediu: ${avgTime.toFixed(2)} s, Evaluare: ${finalRating}`;
-  
+
+  document.getElementById('result').textContent =
+    `Rezultat: ${Math.round(correctPercent)}% corect, Timp mediu: ${avgTime.toFixed(2)} s, Evaluare: ${finalRating}`;
+
   document.getElementById('yesButton').style.display = 'none';
   document.getElementById('noButton').style.display = 'none';
-  
+
   const restartButton = document.getElementById('restartButton');
   restartButton.style.display = 'inline-block';
-  restartButton.removeEventListener('click', restartTest); 
+  restartButton.removeEventListener('click', restartTest); // asigură-te că nu este legat de mai multe ori
   restartButton.addEventListener('click', restartTest);
 }
 
 function restartTest() {
+  // Înapoi la ecranul de start
   document.getElementById('testContainer').style.display = 'none';
   document.getElementById('result').textContent = '';
   document.getElementById('restartButton').style.display = 'none';
-  
+
+  // Afișează butoanele din nou
   document.getElementById('yesButton').style.display = 'inline-block';
   document.getElementById('noButton').style.display = 'inline-block';
-  
+
+  // Afișează din nou ecranul de start
   document.getElementById('startScreen').style.display = 'block';
 }
 
-// Event Listener butoane "Da" și "Nu"
+// Ascultători de evenimente pentru butoanele "Da" și "Nu"
 document.getElementById('yesButton').addEventListener('click', ()=>evaluateAnswer(true));
 document.getElementById('noButton').addEventListener('click', ()=>evaluateAnswer(false));
 </script>
